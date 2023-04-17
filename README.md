@@ -1,7 +1,7 @@
 # CMPT828-CourseProject
 Note: This project was developed on a Windows machine. Path formatting may be different than your machine.
 # Dependencies
-required dependencies:
+Required dependencies:
 Ultralytics: Use pip install ultralytics to install the ultralytics environemnt and any of its dependencies.
 
 HOTA evaluations:
