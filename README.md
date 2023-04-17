@@ -20,20 +20,20 @@ The project repository includes all models, model results and some of the data u
 
 ./TrackEval: The evaluation kit used for calculating HOTA. The MOT17 training dataset was used as an evaluation baseline. The evaluation files were created with create-HOTA.py, and are stored in ./TrackEval/data/trackers/mot_challenge/MOT17-train. Due to the number of video files needed to generate the HOTA evaluation data, all videos are not included in this repo.
 
-./: The root directory contains scripts used to train and evaluate my models.
-Custom model architectures are also contained here, which were used for the ablation study. 'yolov8n-default.yaml' was used to generate an ablation groundtruth model, and 'yolov8n-custom.yaml' generates the ablation model with fewer channels in the backbone of the model. 
+/root: The root directory contains scripts used to train and evaluate my models.
+Custom model architectures are also contained here, which were used for the ablation study. 'yolov8n-default.yaml' was used to generate an ablation groundtruth model, and 'yolov8n-custom.yaml' was used to generate the ablation model with fewer channels in the backbone. 
 
 # Scripts
 For reference, the following scripts are included in the repository:
 train.py - used for training ultralytics models
 track.py - uses an ultralytics model with ByteTrack on a video sequence
 create-pseudo.py - generates pseudolabels and creates a high-confidence set for transfer learning
-mixup.py - takes high-conf dataset from create-pseudo.py and creates mixed synth/real dataset for transfer learning
+mixup.py - takes high-confidence dataset from create-pseudo.py and creates mixed synth/real dataset for transfer learning
 inference.py - used to run predictions on image or video
-create-HOTA.py - used to create the evaluation files for HOTA. This script uses ByteTrack with a model to generate annotations on video files. These annotations are then compared with ground-truth annotations to evaluate the HOTA score. 
+create-HOTA.py - used to create the evaluation files for HOTA. This script uses ByteTrack with a model to generate annotations on video files. These annotation files may then compared with ground-truth annotations to evaluate the HOTA score. 
 
 # Demo
-Since most of my functions use very large datasets, the data required to run them could not be included in this repository; however, I have included the main scripts I used along with comments and pseudocode. I have also included one sample video, which can be used to visually inspect the tracking performance of the weight-averaged model created during my main experiment. To see this output, simply run track.py with python.
+Since most of my functions use very large datasets, the data required to run them could not be included in this repository; however, I have included the main scripts I used along with comments and pseudocode. I have also included one sample video, which can be used to visually inspect the tracking performance of the weight-averaged model created during my main experiment (or any other model if you change the parameter). To see this output, simply run track.py with python.
 
 The main metric used to evaluate performance in my experiment was HOTA. I have pre-generated the HOTA evaluation files for each model on the MOT17 training set, and you will be able to run the evaluation by entering the following code in your terminal:
 python TrackEval/scripts/run_mot_challenge.py --BENCHMARK MOT17 --SPLIT_TO_EVAL train --TRACKERS_TO_EVAL AveragedModels --METRICS HOTA --USE_PARALLEL False --NUM_PARALLEL_CORES 1
